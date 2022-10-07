@@ -1,0 +1,1 @@
+{"name": "Root Snare", "power": 3, "toughness": 3, "cost": "g", "total_cost": "1", "type": "{Quick} Plant Spell", "text": "[Switch] Remove target creature from the game. {/n}{i}(It is treated as though it does not exist until the next turn. Counter all spells and abilities targeting it, it keeps all counters and grafted cards.)", "image": "images_out/InitialTesting/root.png"}

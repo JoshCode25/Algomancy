@@ -1,0 +1,1 @@
+{"name": "Growing Flower", "power": 2, "toughness": 3, "cost": "cg", "type": "Creature \u2014 Flower", "text": "When ~ enters combat, {/n} [Switch] Conjure a Growth X, where X is the number of adjacent creatures.", "image": "images_out/InitialTesting/InitialTesting(367)_10.png"}
