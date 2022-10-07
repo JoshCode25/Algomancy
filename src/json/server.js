@@ -14,17 +14,17 @@ server.listen(port, hostname, () => {
 });
 
 fs = require('fs')
-fs.readFile('../Aggressive One.json', 'utf8', function (err,data) {
+fs.readFile('raw/Aggressive One.json', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
   console.log(data);
 });
 
-const aggressiveOne = require('../Aggressive One.json');
+const aggressiveOne = require('raw/Aggressive One.json');
 console.log(aggressiveOne.name);
 
-fs.readdir('../', 'utf8', function (err, files) {
+fs.readdir('raw/', 'utf8', function (err, files) {
     if (err) {
         return console.log(err);
     }
