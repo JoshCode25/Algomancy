@@ -14,27 +14,48 @@ server.listen(port, hostname, () => {
 });
 
 fs = require('fs')
-fs.readFile('raw/Aggressive One.json', 'utf8', function (err,data) {
+fs.readFile('./raw/Aggressive One.json', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
-  console.log(data);
 });
 
-const aggressiveOne = require('raw/Aggressive One.json');
-console.log(aggressiveOne.name);
+const factionKey = {
+  e: 'earth',
+  p: 'plant',
+  r: 'fire'
+}
 
-fs.readdir('raw/', 'utf8', function (err, files) {
-    if (err) {
-        return console.log(err);
+function setFactions(cost) {
+  let factionList = [];
+  
+  for (let key in factionKey) {
+
+    if (cost.includes(key)) {
+      factionList.push(factionKey[key]);
     }
-    files.forEach(element => {
-        console.log(element);
-        fs.readFile(element, 'utf8', function(err, data) {
+  }
+  return factionList;
+}
+// const aggressiveOne = require('./raw/Aggressive One.json');
+// console.log(aggressiveOne.name);
+
+fs.readdir('./raw/', 'utf8', function (err, files) {
+    if (err) {
+        return console.log('29: ', err);
+    }
+    files.forEach((element, index) => {
+
+        fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
             if (err) {
-                return console.log(err);
+                return console.log('38: ', err);
             }
-            console.log(data.name);
+            if (index < 3) {
+              let info = JSON.parse(data);
+              let {name, power, toughness, cost, total_cost, type, text} = info;
+              let factions = setFactions(cost);
+              console.log(name, cost, factions);
+            }
         })        
     });
 });
