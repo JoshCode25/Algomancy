@@ -20,6 +20,10 @@ fs.readFile('./raw/Aggressive One.json', 'utf8', function (err,data) {
   }
 });
 
+const compiledData = {
+
+}
+
 const factionKey = {
   e: 'earth',
   g: 'wood',
@@ -41,6 +45,7 @@ function setFactions(cost) {
 
   return factionList;
 }
+
 // const aggressiveOne = require('./raw/Aggressive One.json');
 // console.log(aggressiveOne.name);
 
@@ -54,11 +59,34 @@ fs.readdir('./raw/', 'utf8', function (err, files) {
             if (err) {
                 return console.log('38: ', err);
             }
-            if (index < 300) {
+            if (index < 3) {
               let info = JSON.parse(data);
-              let {name, power, toughness, cost, total_cost, type, text} = info;
+              let {name, power, toughness, cost, type, text} = info;
+              let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
               let factions = setFactions(cost);
+              let details = '';
+              let revision_date_time = new Date();
+              let imgUrl = `../Artwork/${name}.jpg`
 
+              compiledData[`${name}`] = 
+              [
+                {
+                  name: name,
+                  factions: factions,
+                  power: power,
+                  toughness: toughness,
+                  cost: cost,
+                  total_cost: total_cost,
+                  type: type,
+                  text: text,
+                  imageUrl: imgUrl,
+                  details: details,
+                  revision_date_time: revision_date_time
+                }
+              ];
+
+              console.log(factions);
+              console.log(compiledData);
             }
         })        
     });
