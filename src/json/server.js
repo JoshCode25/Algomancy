@@ -22,19 +22,23 @@ fs.readFile('./raw/Aggressive One.json', 'utf8', function (err,data) {
 
 const factionKey = {
   e: 'earth',
-  p: 'plant',
-  r: 'fire'
+  g: 'wood',
+  r: 'fire',
+  b: 'water',
+  m: 'metal'
 }
 
 function setFactions(cost) {
   let factionList = [];
   
   for (let key in factionKey) {
-
     if (cost.includes(key)) {
       factionList.push(factionKey[key]);
     }
   }
+
+  if (factionList.length === 0) factionList.push('colorless');
+
   return factionList;
 }
 // const aggressiveOne = require('./raw/Aggressive One.json');
@@ -50,11 +54,11 @@ fs.readdir('./raw/', 'utf8', function (err, files) {
             if (err) {
                 return console.log('38: ', err);
             }
-            if (index < 3) {
+            if (index < 300) {
               let info = JSON.parse(data);
               let {name, power, toughness, cost, total_cost, type, text} = info;
               let factions = setFactions(cost);
-              console.log(name, cost, factions);
+
             }
         })        
     });
