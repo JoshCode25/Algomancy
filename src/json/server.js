@@ -14,11 +14,6 @@ server.listen(port, hostname, () => {
 });
 
 fs = require('fs')
-fs.readFile('./raw/Aggressive One.json', 'utf8', function (err,data) {
-  if (err) {
-    return console.log(err);
-  }
-});
 
 const compiledData = {
 
@@ -46,52 +41,64 @@ function setFactions(cost) {
   return factionList;
 }
 
-fs.readdir('./raw/', 'utf8', function (err, files) {
+async function sortData(element, index) {
+
+  await fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
     if (err) {
-        return console.log('29: ', err);
+        return console.log('readFile: ', err);
     }
-    files.forEach((element, index) => {
 
-      fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
-        if (err) {
-            return console.log('38: ', err);
+    if (index < 3) {
+      let info = JSON.parse(data);
+      let {name, power, toughness, cost, type, text} = info;
+      let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
+      let factions = setFactions(cost);
+      let details = '';
+      let revision_date_time = new Date();
+      let imgUrl = `../Artwork/${name}.jpg`
+
+      let sortedData = 
+      [
+        {
+          name: name,
+          factions: factions,
+          power: power,
+          toughness: toughness,
+          cost: cost,
+          total_cost: total_cost,
+          type: type,
+          text: text,
+          imageUrl: imgUrl,
+          details: details,
+          revision_date_time: revision_date_time
         }
-        if (index < 3) {
-          let info = JSON.parse(data);
-          let {name, power, toughness, cost, type, text} = info;
-          let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
-          let factions = setFactions(cost);
-          let details = '';
-          let revision_date_time = new Date();
-          let imgUrl = `../Artwork/${name}.jpg`
+      ];
 
-          compiledData[`${name}`] = 
-          [
-            {
-              name: name,
-              factions: factions,
-              power: power,
-              toughness: toughness,
-              cost: cost,
-              total_cost: total_cost,
-              type: type,
-              text: text,
-              imageUrl: imgUrl,
-              details: details,
-              revision_date_time: revision_date_time
-            }
-          ];
+      console.log('89: ', sortedData);
 
-          console.log('88: ', factions);
-          console.log('89: ', compiledData[`${name}`]);
-        }
-      })        
-    });
-    
-    try {
-      fs.writeFileSync('./compiledData.json', JSON.stringify(compiledData));
-      console.log(compiledData);
-    } catch (err) {
-      console.error(err);
+      return sortedData;
     }
-});
+  });
+}
+
+function compileData(url) {
+
+    fs.readdirSync(url, 'utf8', function (err, files) {
+      if (err) {
+          return console.log('29: ', err);
+      }
+
+      files.forEach(sortData);     
+          
+      try {
+        console.log(compiledData);
+        fs.writeFileSync('./compiledData.json', JSON.stringify(compiledData));
+      } catch (err) {
+        console.error(err);
+      }
+  });
+}
+
+// compileData('./raw/');
+const bonk = sortData('bonk.json', 1)
+  .then((data) => console.log('Bonk: ', data));
