@@ -46,48 +46,52 @@ function setFactions(cost) {
   return factionList;
 }
 
-// const aggressiveOne = require('./raw/Aggressive One.json');
-// console.log(aggressiveOne.name);
-
 fs.readdir('./raw/', 'utf8', function (err, files) {
     if (err) {
         return console.log('29: ', err);
     }
     files.forEach((element, index) => {
 
-        fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
-            if (err) {
-                return console.log('38: ', err);
-            }
-            if (index < 3) {
-              let info = JSON.parse(data);
-              let {name, power, toughness, cost, type, text} = info;
-              let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
-              let factions = setFactions(cost);
-              let details = '';
-              let revision_date_time = new Date();
-              let imgUrl = `../Artwork/${name}.jpg`
+      fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
+        if (err) {
+            return console.log('38: ', err);
+        }
+        if (index < 3) {
+          let info = JSON.parse(data);
+          let {name, power, toughness, cost, type, text} = info;
+          let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
+          let factions = setFactions(cost);
+          let details = '';
+          let revision_date_time = new Date();
+          let imgUrl = `../Artwork/${name}.jpg`
 
-              compiledData[`${name}`] = 
-              [
-                {
-                  name: name,
-                  factions: factions,
-                  power: power,
-                  toughness: toughness,
-                  cost: cost,
-                  total_cost: total_cost,
-                  type: type,
-                  text: text,
-                  imageUrl: imgUrl,
-                  details: details,
-                  revision_date_time: revision_date_time
-                }
-              ];
-
-              console.log(factions);
-              console.log(compiledData);
+          compiledData[`${name}`] = 
+          [
+            {
+              name: name,
+              factions: factions,
+              power: power,
+              toughness: toughness,
+              cost: cost,
+              total_cost: total_cost,
+              type: type,
+              text: text,
+              imageUrl: imgUrl,
+              details: details,
+              revision_date_time: revision_date_time
             }
-        })        
+          ];
+
+          console.log('88: ', factions);
+          console.log('89: ', compiledData[`${name}`]);
+        }
+      })        
     });
+    
+    try {
+      fs.writeFileSync('./compiledData.json', JSON.stringify(compiledData));
+      console.log(compiledData);
+    } catch (err) {
+      console.error(err);
+    }
 });
