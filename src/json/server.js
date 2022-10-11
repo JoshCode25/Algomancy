@@ -1,9 +1,10 @@
-const http = require('http');
+import { createServer } from 'http';
+import * as fs from 'fs';
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World\n');
@@ -13,11 +14,11 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
-fs = require('fs')
-
 const compiledData = {
 
 }
+
+const dataArray_All = [];
 
 const factionKey = {
   e: 'earth',
@@ -41,44 +42,43 @@ function setFactions(cost) {
   return factionList;
 }
 
-async function sortData(element, index) {
+async function sortData(element) {
 
-  await fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
+  let data = await fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
     if (err) {
         return console.log('readFile: ', err);
     }
+    return data;
+  })
+  console.log(data);
+  let info = data.toString();
+  let {name, power, toughness, cost, type, text} = info;
+  let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
+  let factions = setFactions(cost);
+  let details = '';
+  let imgUrl = `../Artwork/${name}.jpg`
 
-    if (index < 3) {
-      let info = JSON.parse(data);
-      let {name, power, toughness, cost, type, text} = info;
-      let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
-      let factions = setFactions(cost);
-      let details = '';
-      let revision_date_time = new Date();
-      let imgUrl = `../Artwork/${name}.jpg`
-
-      let sortedData = 
-      [
-        {
-          name: name,
-          factions: factions,
-          power: power,
-          toughness: toughness,
-          cost: cost,
-          total_cost: total_cost,
-          type: type,
-          text: text,
-          imageUrl: imgUrl,
-          details: details,
-          revision_date_time: revision_date_time
-        }
-      ];
-
-      console.log('89: ', sortedData);
-
-      return sortedData;
+  let sortedData = 
+  [
+    {
+      name: name,
+      factions: factions,
+      power: power,
+      toughness: toughness,
+      cost: cost,
+      total_cost: total_cost,
+      type: type,
+      text: text,
+      imageUrl: imgUrl,
+      details: details,
+      revision_date_time: new Date()
     }
-  });
+  ];
+
+  dataArray_All.push(sortedData)
+  console.log('79: ', dataArray_All);
+  return sortedData;
+
 }
 
 function compileData(url) {
@@ -100,5 +100,10 @@ function compileData(url) {
 }
 
 // compileData('./raw/');
-const bonk = sortData('bonk.json', 1)
-  .then((data) => console.log('Bonk: ', data));
+// const bonk = (async() => sortData('bonk.json', 1));
+// console.log(bonk);
+
+(async() =>{
+  await sortData('bonk.json');
+  console.log('108: ', dataArray_All);
+})();
