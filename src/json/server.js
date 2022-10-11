@@ -1,10 +1,9 @@
-import { createServer } from 'http';
-import * as fs from 'fs';
+const http = require('http');
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = createServer((req, res) => {
+const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World\n');
@@ -13,6 +12,8 @@ const server = createServer((req, res) => {
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+const fsPromises = require('fs').promises;
 
 const compiledData = {
 
@@ -44,16 +45,15 @@ function setFactions(cost) {
 
 async function sortData(element) {
 
-  let data = await fs.readFile(`./raw/${element}`, 'utf8', function(err, data) {
+  let data = await fsPromises.readFile(`./raw/${element}`, 'utf8', function(err, data) {
     if (err) {
         return console.log('readFile: ', err);
     }
     return data;
   })
-  console.log(data);
-  let info = data.toString();
-  let {name, power, toughness, cost, type, text} = info;
-  let total_cost = parseInt((info.total_cost) ? info.total_cost : cost.length, 10);
+
+  let {name, power, toughness, cost, type, text} = JSON.parse(data);
+  let total_cost = parseInt((data.total_cost) ? data.total_cost : cost.length, 10);
   let factions = setFactions(cost);
   let details = '';
   let imgUrl = `../Artwork/${name}.jpg`
@@ -76,7 +76,6 @@ async function sortData(element) {
   ];
 
   dataArray_All.push(sortedData)
-  console.log('79: ', dataArray_All);
   return sortedData;
 
 }
