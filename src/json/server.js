@@ -15,8 +15,6 @@ server.listen(port, hostname, () => {
 
 const fsPromises = require('fs').promises;
 
-const dataArray_All = [];
-
 const factionKey = {
   e: 'earth',
   g: 'wood',
@@ -99,6 +97,15 @@ async function compileData(url) {
 
   return compiledDataObject; 
       
+}
+
+async function filterData(url, faction) {
+  let compiledData = await fsPromises.readFile(url, 'utf8', function(err, data) {
+    if (err) {
+      return console.log('readFile: ', err);
+    }
+    return data;
+  })
 }
 
 (async() =>{
