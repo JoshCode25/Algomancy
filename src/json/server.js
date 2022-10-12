@@ -83,13 +83,21 @@ async function compileData(url) {
     }
   });
 
-  let compiledData = await Promise.all(fileNames.map(async (element) => {
+  let compiledDataArray = await Promise.all(fileNames.map(async (element) => {
     let sortedData = await sortData(element);
 
     return sortedData;
   }))
 
-  return compiledData; 
+  let compiledDataObject = {};
+
+  compiledDataArray.forEach(element => {
+    let name = element[0].name;
+
+    compiledDataObject[`${name}`] = element;
+  })
+
+  return compiledDataObject; 
       
 }
 
