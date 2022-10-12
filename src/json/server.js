@@ -15,10 +15,6 @@ server.listen(port, hostname, () => {
 
 const fsPromises = require('fs').promises;
 
-const compiledData = {
-
-}
-
 const dataArray_All = [];
 
 const factionKey = {
@@ -75,34 +71,39 @@ async function sortData(element) {
     }
   ];
 
-  dataArray_All.push(sortedData)
   return sortedData;
 
 }
 
-function compileData(url) {
+async function compileData(url) {
 
-    fs.readdirSync(url, 'utf8', function (err, files) {
-      if (err) {
-          return console.log('29: ', err);
-      }
-
-      files.forEach(sortData);     
-          
-      try {
-        console.log(compiledData);
-        fs.writeFileSync('./compiledData.json', JSON.stringify(compiledData));
-      } catch (err) {
-        console.error(err);
-      }
+  let fileNames = await fsPromises.readdir(url, 'utf8', function (err, files) {
+    if (err) {
+        return console.log('29: ', err);
+    }
   });
+
+  let compiledData = await Promise.all(fileNames.map(async (element) => {
+    let sortedData = await sortData(element);
+
+    return sortedData;
+  }))
+
+  return compiledData; 
+      
 }
 
-// compileData('./raw/');
-// const bonk = (async() => sortData('bonk.json', 1));
-// console.log(bonk);
-
 (async() =>{
-  await sortData('bonk.json');
-  console.log('108: ', dataArray_All);
+  // let bonk = await sortData('bonk.json');
+  // console.log('108: ', bonk);
+  
+  let compiledData = await compileData('./raw');
+
+  try {
+
+    await fsPromises.writeFile('./compiledData.json', JSON.stringify(compiledData));
+    console.log('success!');
+  } catch (err) {
+    console.error(err);
+  }
 })();
