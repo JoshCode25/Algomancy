@@ -99,18 +99,16 @@ async function compileData(url) {
       
 }
 
-async function filterData(url, faction) {
-  let compiledData = await fsPromises.readFile(url, 'utf8', function(err, data) {
-    if (err) {
-      return console.log('readFile: ', err);
-    }
-    return data;
-  })
-}
+// async function filterData(url, faction) {
+//   let compiledData = await fsPromises.readFile(url, 'utf8', function(err, data) {
+//     if (err) {
+//       return console.log('readFile: ', err);
+//     }
+//     return data;
+//   })
+// }
 
 (async() =>{
-  // let bonk = await sortData('bonk.json');
-  // console.log('108: ', bonk);
   
   let compiledData = await compileData('./raw');
 
