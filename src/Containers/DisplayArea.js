@@ -1,9 +1,14 @@
 import React from "react";
+import CardContainer from "../Components/CardContainer";
 
-const DisplayArea = () => {
+const DisplayArea = ({displayCards}) => {
 
     return (
-        <div>Display Area</div>
+        <div>
+            <p>Display Area</p>
+            <CardContainer cardInfo={displayCards[0]}/>
+        </div>
+
     )
 }
 
