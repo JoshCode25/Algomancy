@@ -6,7 +6,12 @@ const CardContainer = ({cardInfo}) => {
 
     return (
         <div onClick={() => {toggleInfo(cardName)}}>
-            <img src={`./Artwork/${cardName}.jpg`} alt={`${cardName}`}/>
+            <img 
+                src={`${process.env.PUBLIC_URL}/Artwork/${cardName}.jpg`} 
+                alt={`${cardName}`}
+                width={'240'}
+                height={'333'}
+            />
         </div>
     )
 }

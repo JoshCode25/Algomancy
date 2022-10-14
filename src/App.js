@@ -6,11 +6,32 @@ import compiledData from './json/compiledData.json';
 
 function App() {
   const [displayCards, setDisplayCards] = useState([]);
+  const [allCards, setAllCards] = useState([]);
 
   useEffect(() => {
-    console.log(compiledData.Bonk);
+    let arrayedData = []
+
+    for (let data in compiledData) {
+      if(arrayedData.length < 4) { //dont cycle through all 187 for testing
+        let cardObject = {}
+        let dataName = data
+        cardObject[`${dataName}`] = compiledData[`${dataName}`][0];
+
+        arrayedData.push(cardObject);
+      } else {
+        console.log(arrayedData);
+        break;
+      }
+    }
+
+    setAllCards(arrayedData);
+    console.log(allCards);
+  },[])
+
+  useEffect(() => {
+
     setDisplayCards(compiledData.Bonk);
-    console.log(displayCards);
+
   }, [displayCards])
 
   const factionList = [
@@ -25,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <SearchArea factionList={factionList}/>
-      <DisplayArea displayCards={displayCards}/>
+      <DisplayArea displayCards={allCards}/>
     </div>
   );
 }
