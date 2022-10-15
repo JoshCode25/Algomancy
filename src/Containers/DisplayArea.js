@@ -1,17 +1,17 @@
 import React from "react";
 import CardContainer from "../Components/CardContainer";
 
-const DisplayArea = ({displayNames, compiledData}) => {
+const DisplayArea = ({displayCardNames, compiledData}) => {
 
     return (
         <div>
             <p>Display Area</p>
-            {(displayNames.length < 1) ? "" : 
-                displayNames.map((displayName, i) => {
+            {(displayCardNames.length < 1) ? "" : 
+                displayCardNames.map((displayCardName, i) => {
                     return(
                         <CardContainer
-                            key={`${displayName}`}
-                            cardInfo={compiledData[`${displayName}`]}
+                            key={`${displayCardName}`}
+                            cardInfo={compiledData[`${displayCardName}`]}
                         />
                     )
                 })

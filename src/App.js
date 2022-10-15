@@ -5,45 +5,89 @@ import DisplayArea from './Containers/DisplayArea';
 import compiledData from './json/compiledData.json';
 
 function App() {
-  const [displayCards, setDisplayCards] = useState([]);
+  const [displayCardNames, setDisplayCardNames] = useState([]);
   const [allCardNames, setAllCardNames] = useState([]);
-
-  useEffect(() => {
-    let arrayedNames = []
-
-    for (let data in compiledData) {
-      if(arrayedNames.length < 4) { //dont cycle through all 187 for testing
-        let cardName = data
-
-        arrayedNames.push(cardName);
-      } else {
-        console.log(arrayedNames);
-        break;
-      }
-    }
-
-    setAllCardNames(arrayedNames);
-  },[])
-
-  useEffect(() => {
-
-    setDisplayCards(compiledData.Bonk);
-
-  }, [displayCards])
+  const [searchField, setSearchField] = useState('');
+  const [factionFilter, setFactionFilter] = useState({});
 
   const factionList = [
     ['earth', 'e'],
     ['wood', 'g'],
     ['fire', 'r'],
     ['water', 'b'],
-    ['metal', 'm']  
+    ['metal', 'm'],
+    ['colorless', 'c']  
   ]
 
+  useEffect(() => { //set state default values onMount
+    //set default array with all the card names
+    let arrayedNames = [];
+    for (let data in compiledData) {
+      if(arrayedNames.length < 200) { //potential limiter to test less cards
+        let cardName = data
+        
+        arrayedNames.push(cardName);
+      } else {
+        console.log(arrayedNames);
+        break;
+      }
+    }
+    
+    setAllCardNames(arrayedNames);
+
+    //set faction filter to default as true
+    let defaultFactionFilter = {};
+    factionList.forEach((faction) => {
+      let factionName = faction[0];
+      defaultFactionFilter[`${factionName}`] = true;
+    })
+
+    setFactionFilter(defaultFactionFilter);
+  },[])
+
+  useEffect(() => {
+    let displayedFactions = [];
+    for (let faction in factionFilter) {
+      if(factionFilter[faction]) {
+        displayedFactions.push(faction);
+      }
+    }
+    console.log(displayedFactions);
+
+    const filteredCardNames = allCardNames.filter(cardName =>{
+      let testBoolean = false;
+      let cardInfo = compiledData[cardName][0];
+      let cardText = cardInfo.text;
+      let cardType = cardInfo.type;
+      let cardFactions = cardInfo.factions;
+
+      let containsName = cardName.toLowerCase().includes(searchField.toLowerCase());
+      let containsText = cardText.toLowerCase().includes(searchField.toLowerCase());
+      let containsType = cardType.toLowerCase().includes(searchField.toLowerCase());
+
+      //UPDATE CONTAINS FUNCTION
+      // let factionTrue = arr1.some(r=> arr2.indexOf(r) >= 0)
+
+      if((containsName || containsText || containsType) /*&& factionTrue*/) {
+        testBoolean = true;
+      }
+
+      return testBoolean;
+    })
+
+    setDisplayCardNames(filteredCardNames);
+
+  }, [searchField])
+
+  const onSearchChange = (e) => {
+    setSearchField(e.target.value);
+    console.log(searchField);
+  }
 
   return (
     <div className="App">
-      <SearchArea factionList={factionList}/>
-      <DisplayArea displayNames={allCardNames} compiledData={compiledData}/>
+      <SearchArea factionList={factionList} setFactionFilter={setFactionFilter} onSearchChange={onSearchChange}/>
+      <DisplayArea displayCardNames={displayCardNames} compiledData={compiledData}/>
     </div>
   );
 }
