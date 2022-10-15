@@ -1,8 +1,8 @@
 import React from "react";
 
 const CardContainer = ({cardInfo}) => {
-    const cardName = (cardInfo) ? cardInfo.name : 'default';
-    const toggleInfo = (cardName) => (alert(cardName));
+    const cardName = (cardInfo) ? cardInfo[0].name : 'default';
+    const toggleInfo = (cardName) => (console.log(cardName));
 
     return (
         <div onClick={() => {toggleInfo(cardName)}}>

@@ -6,26 +6,23 @@ import compiledData from './json/compiledData.json';
 
 function App() {
   const [displayCards, setDisplayCards] = useState([]);
-  const [allCards, setAllCards] = useState([]);
+  const [allCardNames, setAllCardNames] = useState([]);
 
   useEffect(() => {
-    let arrayedData = []
+    let arrayedNames = []
 
     for (let data in compiledData) {
-      if(arrayedData.length < 4) { //dont cycle through all 187 for testing
-        let cardObject = {}
-        let dataName = data
-        cardObject[`${dataName}`] = compiledData[`${dataName}`][0];
+      if(arrayedNames.length < 4) { //dont cycle through all 187 for testing
+        let cardName = data
 
-        arrayedData.push(cardObject);
+        arrayedNames.push(cardName);
       } else {
-        console.log(arrayedData);
+        console.log(arrayedNames);
         break;
       }
     }
 
-    setAllCards(arrayedData);
-    console.log(allCards);
+    setAllCardNames(arrayedNames);
   },[])
 
   useEffect(() => {
@@ -46,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <SearchArea factionList={factionList}/>
-      <DisplayArea displayCards={allCards}/>
+      <DisplayArea displayNames={allCardNames} compiledData={compiledData}/>
     </div>
   );
 }

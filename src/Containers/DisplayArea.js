@@ -1,21 +1,19 @@
 import React from "react";
 import CardContainer from "../Components/CardContainer";
 
-const DisplayArea = ({displayCards}) => {
-    console.log(displayCards);
+const DisplayArea = ({displayNames, compiledData}) => {
 
     return (
         <div>
             <p>Display Area</p>
-            {(displayCards.length < 1) ? "" : 
-                displayCards.map((card, i) => {
-                    console.log(Object.values(card)[0]);
-                    // return(
-                    //     <CardContainer
-                    //         key={`${card[0].name}`}
-                    //         cardInfo={card[0]}
-                    //     />
-                    // )
+            {(displayNames.length < 1) ? "" : 
+                displayNames.map((displayName, i) => {
+                    return(
+                        <CardContainer
+                            key={`${displayName}`}
+                            cardInfo={compiledData[`${displayName}`]}
+                        />
+                    )
                 })
             }
         </div>
