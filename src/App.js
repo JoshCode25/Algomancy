@@ -3,21 +3,13 @@ import React, {useState, useEffect} from 'react';
 import SearchArea from './Containers/SearchArea';
 import DisplayArea from './Containers/DisplayArea';
 import compiledData from './json/compiledData.json';
+import factionList from './Assets/factionList';
 
 function App() {
   const [displayCardNames, setDisplayCardNames] = useState([]);
   const [allCardNames, setAllCardNames] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [factionFilter, setFactionFilter] = useState({});
-
-  const factionList = [
-    ['earth', 'e'],
-    ['wood', 'g'],
-    ['fire', 'r'],
-    ['water', 'b'],
-    ['metal', 'm'],
-    ['colorless', 'c']  
-  ]
 
   useEffect(() => { //set state default values onMount
     //set default array with all the card names
@@ -60,15 +52,19 @@ function App() {
       let cardText = cardInfo.text;
       let cardType = cardInfo.type;
       let cardFactions = cardInfo.factions;
+      let filteredFactions = []
+      for (let faction in factionFilter) {
+        if (factionFilter[faction]) {
+          filteredFactions.push(faction);
+        }
+      }
 
       let containsName = cardName.toLowerCase().includes(searchField.toLowerCase());
       let containsText = cardText.toLowerCase().includes(searchField.toLowerCase());
       let containsType = cardType.toLowerCase().includes(searchField.toLowerCase());
+      let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
 
-      //UPDATE CONTAINS FUNCTION
-      // let factionTrue = arr1.some(r=> arr2.indexOf(r) >= 0)
-
-      if((containsName || containsText || containsType) /*&& factionTrue*/) {
+      if((containsName || containsText || containsType) && factionTrue) {
         testBoolean = true;
       }
 
@@ -77,7 +73,7 @@ function App() {
 
     setDisplayCardNames(filteredCardNames);
 
-  }, [searchField])
+  }, [searchField, factionFilter])
 
   const onSearchChange = (e) => {
     setSearchField(e.target.value);
@@ -86,7 +82,9 @@ function App() {
 
   return (
     <div className="App">
-      <SearchArea factionList={factionList} setFactionFilter={setFactionFilter} onSearchChange={onSearchChange}/>
+      <SearchArea 
+        factionList={factionList} setFactionFilter={setFactionFilter} factionFilter={factionFilter} onSearchChange={onSearchChange}
+      />
       <DisplayArea displayCardNames={displayCardNames} compiledData={compiledData}/>
     </div>
   );
