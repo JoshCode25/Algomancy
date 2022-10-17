@@ -1,0 +1,34 @@
+.button-earth {
+    color: white;
+    background-color: brown
+}
+
+.button-wood {
+    color: white;
+    background-color: green;
+}
+
+.button-fire {
+    color: white;
+    background-color: red
+}
+
+.button-water {
+    color: white;
+    background-color: blue
+}
+
+.button-metal {
+    color: white;
+    background-color: lightsteelblue
+}
+
+.button-colorless {
+    color: white;
+    background-color: gray;
+}
+
+.button-off {
+    color: gray;
+    background-color: whitesmoke;
+}
