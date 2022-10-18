@@ -1,3 +1,11 @@
+button {
+    margin: 5px 5px;
+    width: 75px;
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
 .button-earth {
     color: white;
     background-color: brown

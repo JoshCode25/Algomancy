@@ -5,7 +5,7 @@ const CardContainer = ({cardInfo}) => {
     const toggleInfo = (cardName) => (console.log(cardName));
 
     return (
-        <div onClick={() => {toggleInfo(cardName)}}>
+        <div onClick={() => {toggleInfo(cardName)}} className='cardContainer'>
             <img 
                 src={`${process.env.PUBLIC_URL}/Artwork/${cardName}.jpg`} 
                 alt={`${cardName}`}

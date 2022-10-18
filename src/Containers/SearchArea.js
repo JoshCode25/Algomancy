@@ -1,11 +1,12 @@
 import React from "react";
 import FilterButton from "../Components/FilterButton.js";
+import '../CSS/searchArea.css'
 
 const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilter}) => {
 
     return (
         <div>
-            <div>Search Area</div>
+            <p>Search Names, Text, and Types</p>
             <input
                 type='search'
                 placeholder='search Cards'

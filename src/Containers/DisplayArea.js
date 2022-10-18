@@ -1,21 +1,24 @@
 import React from "react";
 import CardContainer from "../Components/CardContainer";
+import '../CSS/displayArea.css'
 
 const DisplayArea = ({displayCardNames, compiledData}) => {
 
     return (
         <div>
-            <p>Display Area</p>
-            {(displayCardNames.length < 1) ? "" : 
-                displayCardNames.map((displayCardName, i) => {
-                    return(
-                        <CardContainer
-                            key={`${displayCardName}`}
-                            cardInfo={compiledData[`${displayCardName}`]}
-                        />
-                    )
-                })
-            }
+            <p className='totalDisplay'>{`Total Displayed: ${displayCardNames.length}`}</p>
+            <div className="scroll">
+                {(displayCardNames.length < 1) ? "" : 
+                    displayCardNames.map((displayCardName, i) => {
+                        return(
+                            <CardContainer
+                                key={`${displayCardName}`}
+                                cardInfo={compiledData[`${displayCardName}`]}
+                            />
+                        )
+                    })
+                }
+            </div>
         </div>
 
     )

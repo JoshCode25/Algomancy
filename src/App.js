@@ -6,8 +6,8 @@ import compiledData from './json/compiledData.json';
 import factionList from './Assets/factionList';
 
 function App() {
-  const [displayCardNames, setDisplayCardNames] = useState([]);
   const [allCardNames, setAllCardNames] = useState([]);
+  const [displayCardNames, setDisplayCardNames] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [factionFilter, setFactionFilter] = useState({});
 

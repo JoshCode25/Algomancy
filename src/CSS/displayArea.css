@@ -1,0 +1,16 @@
+.totalDisplay {
+    font-size: 16px;
+    margin: 5px auto;
+}
+
+.scroll {
+    height: 600px;
+    overflow: scroll;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.cardContainer {
+    margin: 5px;
+}
