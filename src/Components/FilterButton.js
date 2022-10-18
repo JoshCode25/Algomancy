@@ -1,4 +1,4 @@
-import {React, useEffect} from "react";
+import React from "react";
 import '../CSS/factionButton.css'
 
 const FilterButton = ({factionName, setFactionFilter, factionFilter}) => {
@@ -7,10 +7,9 @@ const FilterButton = ({factionName, setFactionFilter, factionFilter}) => {
     let buttonClassOff = 'button-Off';
     
     const toggleFactionFilter = () => {
-        let toggledFactionFilter = factionFilter;
-        toggledFactionFilter[factionName] = !toggledFactionFilter[factionName];
-        setFactionFilter(toggledFactionFilter)
-        console.log(factionFilter[factionName]);
+        let toggledFaction = {};
+        toggledFaction[factionName] = !factionFilter[factionName];
+        setFactionFilter(factionFilter => ({...factionFilter, ...toggledFaction}))
     }
     
 
