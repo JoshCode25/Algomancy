@@ -9,7 +9,7 @@ const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilte
             <p>Search Names, Text, and Types</p>
             <input
                 type='search'
-                placeholder='search Cards'
+                placeholder='Search Algomancy Cards'
                 onChange={onSearchChange}
             />
             <div>
