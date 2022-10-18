@@ -9,8 +9,8 @@ const CardContainer = ({cardInfo}) => {
             <img 
                 src={`${process.env.PUBLIC_URL}/Artwork/${cardName}.jpg`} 
                 alt={`${cardName}`}
-                width={'240'}
-                height={'333'}
+                width={'300'}
+                height={'417'}
             />
         </div>
     )
