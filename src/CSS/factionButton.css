@@ -1,40 +1,49 @@
+html {
+    --earth-brown: brown;
+    --wood-green: green;
+    --fire-red: red;
+    --water-blue: cornflowerblue;
+    --metal-gray: lightsteelblue;
+    --colorless-gray: gray;
+}
+
 button {
     font-size: 16px;
     margin: 5px 5px;
-    width: 75px;
-    height: 35px;
+    min-width: 80px;
+    min-height: 40px;
     border: 2px solid black;
     border-radius: 5px;
 }
 
 .button-earth {
     color: white;
-    background-color: brown
+    background-color: var(--earth-brown);
 }
 
 .button-wood {
     color: white;
-    background-color: green;
+    background-color: var(--wood-green);
 }
 
 .button-fire {
     color: white;
-    background-color: red
+    background-color: var(--fire-red);
 }
 
 .button-water {
     color: white;
-    background-color: blue
+    background-color: var(--water-blue);
 }
 
 .button-metal {
     color: white;
-    background-color: lightsteelblue
+    background-color: var(--metal-gray);
 }
 
 .button-colorless {
     color: white;
-    background-color: gray;
+    background-color: var(--colorless-gray);
 }
 
 .button-off {

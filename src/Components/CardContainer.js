@@ -1,4 +1,5 @@
 import React from "react";
+import '../CSS/cardContainer.css'
 
 const CardContainer = ({cardInfo}) => {
     const cardName = (cardInfo) ? cardInfo[0].name : 'default';
@@ -7,10 +8,9 @@ const CardContainer = ({cardInfo}) => {
     return (
         <div onClick={() => {toggleInfo(cardName)}} className='cardContainer'>
             <img 
+                className='cardImg'
                 src={`${process.env.PUBLIC_URL}/Artwork/${cardName}.jpg`} 
                 alt={`${cardName}`}
-                width={'300'}
-                height={'417'}
             />
         </div>
     )
