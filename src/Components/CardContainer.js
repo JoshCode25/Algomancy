@@ -9,6 +9,7 @@ const CardContainer = ({cardInfo}) => {
         <div onClick={() => {toggleInfo(cardName)}} className='cardContainer'>
             <img 
                 className='cardImg'
+                loading="lazy"
                 src={`${process.env.PUBLIC_URL}/Artwork/${cardName}.jpg`} 
                 alt={`${cardName}`}
             />
