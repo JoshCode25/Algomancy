@@ -5,7 +5,7 @@
 
 .scroll {
     height: 600px;
-    overflow: scroll;
+    /* overflow: scroll; */
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
