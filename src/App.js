@@ -2,29 +2,36 @@ import './App.css';
 import React, {useState, useEffect} from 'react';
 import SearchArea from './Containers/SearchArea';
 import DisplayArea from './Containers/DisplayArea';
-import compiledData from './json/compiledData.json';
 import factionList from './Assets/factionList';
 
 function App() {
+  const [compiledData, setCompiledData] = useState({});
   const [allCardNames, setAllCardNames] = useState([]);
   const [displayCardNames, setDisplayCardNames] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [factionFilter, setFactionFilter] = useState({});
 
+  useEffect(() => {
+    async function fetchCardData() {
+      let cardData = await (await fetch('https://calebgannon.com/wp-content/uploads/algomancy-extras/AlgomancyCards.json')).json();
+      setCompiledData(cardData);
+    }
+
+    fetchCardData();
+  },[] )
+
   useEffect(() => { //set state default values onMount
     //set default array with all the card names
     let arrayedNames = [];
     for (let data in compiledData) {
-      if(arrayedNames.length < 200) { //potential limiter to test less cards
         let cardName = data
         
-        arrayedNames.push(cardName);
-      } else {
-        console.log(arrayedNames);
-        break;
+      arrayedNames.push(cardName);
+      if(cardName === 'Bonk'){
+        console.log(compiledData[cardName]);
       }
+
     }
-    
     setAllCardNames(arrayedNames);
 
     //set faction filter to default as true
@@ -35,7 +42,7 @@ function App() {
     })
 
     setFactionFilter(defaultFactionFilter);
-  },[])
+  },[compiledData])
 
   useEffect(() => {
     let displayedFactions = [];
@@ -44,7 +51,6 @@ function App() {
         displayedFactions.push(faction);
       }
     }
-    console.log(displayedFactions);
 
     const filteredCardNames = allCardNames.filter(cardName =>{
       let testBoolean = false;
