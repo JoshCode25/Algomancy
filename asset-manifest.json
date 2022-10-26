@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/algomancy/static/css/main.9af20b54.css",
-    "main.js": "/algomancy/static/js/main.87fcf6c8.js",
+    "main.css": "/algomancy/static/css/main.5a3f28ad.css",
+    "main.js": "/algomancy/static/js/main.e42aaa68.js",
     "static/js/787.62fd8c3d.chunk.js": "/algomancy/static/js/787.62fd8c3d.chunk.js",
     "index.html": "/algomancy/index.html",
-    "main.9af20b54.css.map": "/algomancy/static/css/main.9af20b54.css.map",
-    "main.87fcf6c8.js.map": "/algomancy/static/js/main.87fcf6c8.js.map",
+    "main.5a3f28ad.css.map": "/algomancy/static/css/main.5a3f28ad.css.map",
+    "main.e42aaa68.js.map": "/algomancy/static/js/main.e42aaa68.js.map",
     "787.62fd8c3d.chunk.js.map": "/algomancy/static/js/787.62fd8c3d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9af20b54.css",
-    "static/js/main.87fcf6c8.js"
+    "static/css/main.5a3f28ad.css",
+    "static/js/main.e42aaa68.js"
   ]
 }
