@@ -17,7 +17,7 @@ const FilterButton = ({factionName, setFactionFilter, factionFilter}) => {
         <button 
             type="button" 
             onClick={toggleFactionFilter}
-            className={factionFilter[factionName] ? buttonClassOn : buttonClassOff}
+            className={`algomancy-cards-button ${factionFilter[factionName] ? buttonClassOn : buttonClassOff}`}
         >{factionName}</button>
     )
 }

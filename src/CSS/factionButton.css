@@ -7,7 +7,7 @@ html {
     --colorless-gray: gray;
 }
 
-button {
+.algomancy-cards-button {
     font-size: 16px;
     margin: 5px 5px;
     min-width: 80px;
@@ -16,7 +16,7 @@ button {
     border-radius: 8px;
 }
 
-button:hover {
+.algomancy-cards-button:hover {
     cursor: pointer;
     opacity: 0.8;
 }
