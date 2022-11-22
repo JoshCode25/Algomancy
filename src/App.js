@@ -51,9 +51,12 @@ function App() {
         displayedFactions.push(faction);
       }
     }
+    let regexCheck = /(^\/).*(\/).*/g;
+    let isRegex = regexCheck.test(searchField);
 
     const filteredCardNames = allCardNames.filter(cardName =>{
-      let testBoolean = false;
+      let includeCard = false;
+      let containsSearch = false;
       let cardInfo = compiledData[cardName][0];
       let cardText = cardInfo.text;
       let cardType = cardInfo.type;
@@ -64,17 +67,33 @@ function App() {
           filteredFactions.push(faction);
         }
       }
+      let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
 
+      if(!isRegex) {
+        let compiledString = cardName.concat(' ', cardText, ' ', cardType);
+        let searchFieldWords = searchField.split(' ');
+        let searchFieldRegex = searchFieldWords.map(word => {
+          let nonWordCharacters = word.match(/[^a-zA-z0-9_\s]/g)
+          if (nonWordCharacters !== null) {
+            nonWordCharacters.map(char => `\\${char}`);
+          }
+
+
+          `(?=.*${word})`}).join('');
+        let regexExp = new RegExp(searchFieldRegex,'gi');
+        containsSearch = regexExp.test(compiledString);
+        console.log(compiledString, searchFieldWords,searchFieldRegex, containsSearch)
+
+      }
       let containsName = cardName.toLowerCase().includes(searchField.toLowerCase());
       let containsText = cardText.toLowerCase().includes(searchField.toLowerCase());
       let containsType = cardType.toLowerCase().includes(searchField.toLowerCase());
-      let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
 
-      if((containsName || containsText || containsType) && factionTrue) {
-        testBoolean = true;
+      if(containsSearch && factionTrue) {
+        includeCard = true;
       }
 
-      return testBoolean;
+      return includeCard;
     })
 
     setDisplayCardNames(filteredCardNames);
