@@ -60,6 +60,7 @@ function App() {
       let cardInfo = compiledData[cardName][0];
       let cardText = cardInfo.text;
       let cardType = cardInfo.type;
+      let compiledString = cardName.concat(' ', cardText, ' ', cardType);
       let cardFactions = cardInfo.factions;
       let filteredFactions = []
       for (let faction in factionFilter) {
@@ -67,25 +68,44 @@ function App() {
           filteredFactions.push(faction);
         }
       }
+
       let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
 
       if(!isRegex) {
-        let compiledString = cardName.concat(' ', cardText, ' ', cardType);
         let searchFieldWords = searchField.split(' ');
-        let searchFieldRegex = searchFieldWords.map(word => {
-          //finds and replaces all non-word characters with an \ before
-          let nonWordCharacters = word.match(/[^a-zA-z0-9_\s]/g)
-          if (nonWordCharacters !== null) {
-            nonWordCharacters.map(char => `\\${char}`);
-          }
-          //need to add escaped non-word characters in to replace originals
+        for(let i = 0; i < searchFieldWords.length; i++) {
+          let doesContain = compiledString.toLowerCase().includes(searchFieldWords[i]);
+          if (!doesContain) break;
+          if (i=== searchFieldWords.length -1) containsSearch = true;
+        }
 
-          `(?=.*${word})`}).join('');
-        //Need to add '\' before all non-word characters to prevent RegExp crashes
-        let regexExp = new RegExp(searchFieldRegex,'gi');
-        containsSearch = regexExp.test(compiledString);
-        console.log(compiledString, searchFieldWords,searchFieldRegex, containsSearch)
+        // let searchFieldRegex = searchFieldWords.map(word => {
+        //   //finds and replaces all non-word characters with an \ before
+        //   let nonWordCharacters = word.match(/[^a-zA-z0-9_\s]/g)
+        //   if (nonWordCharacters !== null) {
+        //     nonWordCharacters.map(char => `\\${char}`);
+        //   }
+        //   //need to add escaped non-word characters in to replace originals
 
+        //   `(?=.*${word})`}).join('');
+        // //Need to add '\' before all non-word characters to prevent RegExp crashes
+        // let regexExp = new RegExp(searchFieldRegex,'gi');
+        // containsSearch = regexExp.test(compiledString);
+        // console.log(compiledString, searchFieldWords,searchFieldRegex, containsSearch)
+      } else if (isRegex) {
+        let containsModifiers = searchField.at(-1) === '/'? false : true;
+        let splitSearch = searchField.split('/').filter(item => item !== '');
+        let searchRegex = '';
+        let modifiers = '';
+        if (!containsModifiers) {
+          searchRegex = splitSearch.join('/');
+        } else if (containsModifiers) {
+          modifiers = splitSearch.pop().replace(/[^igm]/g,'');
+          searchRegex = splitSearch.join('/');
+        }
+        let regex = new RegExp(searchRegex, modifiers);
+        containsSearch = regex.test(compiledString);
+        console.log(cardName, regex, containsSearch);
       }
       let containsName = cardName.toLowerCase().includes(searchField.toLowerCase());
       let containsText = cardText.toLowerCase().includes(searchField.toLowerCase());
