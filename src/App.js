@@ -73,13 +73,15 @@ function App() {
         let compiledString = cardName.concat(' ', cardText, ' ', cardType);
         let searchFieldWords = searchField.split(' ');
         let searchFieldRegex = searchFieldWords.map(word => {
+          //finds and replaces all non-word characters with an \ before
           let nonWordCharacters = word.match(/[^a-zA-z0-9_\s]/g)
           if (nonWordCharacters !== null) {
             nonWordCharacters.map(char => `\\${char}`);
           }
-
+          //need to add escaped non-word characters in to replace originals
 
           `(?=.*${word})`}).join('');
+        //Need to add '\' before all non-word characters to prevent RegExp crashes
         let regexExp = new RegExp(searchFieldRegex,'gi');
         containsSearch = regexExp.test(compiledString);
         console.log(compiledString, searchFieldWords,searchFieldRegex, containsSearch)
