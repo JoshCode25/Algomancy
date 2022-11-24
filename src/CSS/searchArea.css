@@ -8,4 +8,11 @@ input {
     height: 35px;
     width: 250px;
     font-size: 18px;
+
+}
+
+@media  screen and (min-width: 400px) {
+    input {
+        width: 350px;
+    }
 }
