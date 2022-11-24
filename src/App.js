@@ -10,7 +10,6 @@ function App() {
   const [displayCardNames, setDisplayCardNames] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [factionFilter, setFactionFilter] = useState({});
-  const [invalidRegex, setInvalidRegex] = useState(false);
 
   useEffect(() => {
     async function fetchCardData() {
@@ -28,9 +27,6 @@ function App() {
         let cardName = data
         
       arrayedNames.push(cardName);
-      if(cardName === 'Bonk'){
-        console.log(compiledData[cardName]);
-      }
 
     }
     setAllCardNames(arrayedNames);
@@ -52,12 +48,15 @@ function App() {
         displayedFactions.push(faction);
       }
     }
-    let searchFieldWords = searchField.split(' ');
 
-    let regexCheck = /(^\/).*(\/).*/g;
+    //check if the search input starts with / and contains a non escaped / to see if it's a regex
+    let searchFieldWords = searchField.split(' ');
+    let regexCheck = /(^\/).*([^\\]\/g?i?m?)$/g;
     let isRegex = regexCheck.test(searchField);
-    let isValidRegex = false;
-    let containsModifiers, splitSearch, searchRegex, modifiers, regex;
+    let invalidRegex = false;
+
+    let containsModifiers = false, splitSearch = [], searchRegex = '', modifiers = '', regex = '';
+    let filteredCardNames = [];
     if(isRegex) {
       containsModifiers = searchField.at(-1) === '/'? false : true;
       //remove empty spaces caused by / removal
@@ -71,71 +70,62 @@ function App() {
           searchRegex = splitSearch.join('/');
         }
 
-        isValidRegex = (/.*(\\\/)$/.test(searchRegex) && searchRegex.length > 0);
-        console.log(searchRegex, /(\\\/)$/.test(searchRegex), searchRegex.length)
-        if(isValidRegex) regex = new RegExp(searchRegex, modifiers);
+        try {
+          regex = new RegExp(searchRegex, modifiers);
+          invalidRegex = false;
+        } catch (error) {
+          console.error(error);
+          invalidRegex = true;
+        }
     }
     
-    const filteredCardNames = allCardNames.filter(cardName =>{
-      let includeCard = false;
-      let containsSearch = false;
-      let cardInfo = compiledData[cardName][0];
-      let cardText = cardInfo.text;
-      let cardType = cardInfo.type;
-      let compiledString = cardName.concat(' ', cardText, ' ', cardType);
-      let cardFactions = cardInfo.factions;
-      let filteredFactions = []
-      for (let faction in factionFilter) {
-        if (factionFilter[faction]) {
-          filteredFactions.push(faction);
-        }
-      }
-
-      let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
-
-      if(!isValidRegex) {
-        for(let i = 0; i < searchFieldWords.length; i++) {
-          let doesContain = compiledString.toLowerCase().includes(searchFieldWords[i]);
-          if (!doesContain) break;
-          if (i === searchFieldWords.length -1) containsSearch = true;
+    if(!invalidRegex) {
+      filteredCardNames = allCardNames.filter(cardName =>{
+        let includeCard = false;
+        let containsSearch = false;
+        let cardInfo = compiledData[cardName][0];
+        let cardText = cardInfo.text;
+        let cardType = cardInfo.type;
+        let compiledString = cardName.concat(' ', cardText, ' ', cardType);
+        let cardFactions = cardInfo.factions;
+        let filteredFactions = []
+        for (let faction in factionFilter) {
+          if (factionFilter[faction]) {
+            filteredFactions.push(faction);
+          }
         }
 
-        // let searchFieldRegex = searchFieldWords.map(word => {
-        //   //finds and replaces all non-word characters with an \ before
-        //   let nonWordCharacters = word.match(/[^a-zA-z0-9_\s]/g)
-        //   if (nonWordCharacters !== null) {
-        //     nonWordCharacters.map(char => `\\${char}`);
-        //   }
-        //   //need to add escaped non-word characters in to replace originals
+        let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
 
-        //   `(?=.*${word})`}).join('');
-        // //Need to add '\' before all non-word characters to prevent RegExp crashes
-        // let regexExp = new RegExp(searchFieldRegex,'gi');
-        // containsSearch = regexExp.test(compiledString);
-        // console.log(compiledString, searchFieldWords,searchFieldRegex, containsSearch)
-      } else if (isValidRegex) {
- 
-        containsSearch = regex.test(compiledString);
-        // console.log(cardName, regex, containsSearch);
-      }
-      let containsName = cardName.toLowerCase().includes(searchField.toLowerCase());
-      let containsText = cardText.toLowerCase().includes(searchField.toLowerCase());
-      let containsType = cardType.toLowerCase().includes(searchField.toLowerCase());
+        if(!isRegex) {
+          for(let i = 0; i < searchFieldWords.length; i++) {
+            let doesContain = compiledString.toLowerCase().includes(searchFieldWords[i]);
+            if (!doesContain) break;
+            if (i === searchFieldWords.length -1) containsSearch = true;
+          }
 
-      if(containsSearch && factionTrue) {
-        includeCard = true;
-      }
+        } else if (isRegex) {
+  
+          try {
+            containsSearch = regex.test(compiledString);
+          } catch (error) {
+            console.error(error);
+          }
+        }
 
-      return includeCard;
-    })
+        if(containsSearch && factionTrue) {
+          includeCard = true;
+        }
 
+        return includeCard;
+      })
+    }
     setDisplayCardNames(filteredCardNames);
 
   }, [searchField, factionFilter])
 
   const onSearchChange = (e) => {
     setSearchField(e.target.value);
-    console.log(searchField);
   }
 
   return (
