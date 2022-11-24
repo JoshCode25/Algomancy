@@ -7,7 +7,7 @@ html {
     --colorless-gray: gray;
 }
 
-.algomancy-cards-button {
+div#algomancyButtonWrapper > button.algomancy-cards-button {
     font-size: 16px;
     margin: 5px 5px;
     min-width: 80px;
@@ -16,42 +16,42 @@ html {
     border-radius: 8px;
 }
 
-.algomancy-cards-button:hover {
+div#algomancyButtonWrapper > button.algomancy-cards-button:hover {
     cursor: pointer;
     opacity: 0.8;
 }
 
-.button-earth {
+div#algomancyButtonWrapper > button.button-earth {
     color: white;
     background-color: var(--earth-brown);
 }
 
-.button-wood {
+div#algomancyButtonWrapper > button.button-wood {
     color: white;
     background-color: var(--wood-green);
 }
 
-.button-fire {
+div#algomancyButtonWrapper > button.button-fire {
     color: white;
     background-color: var(--fire-red);
 }
 
-.button-water {
+div#algomancyButtonWrapper > button.button-water {
     color: white;
     background-color: var(--water-blue);
 }
 
-.button-metal {
+div#algomancyButtonWrapper > button.button-metal {
     color: white;
     background-color: var(--metal-gray);
 }
 
-.button-colorless {
+div#algomancyButtonWrapper > button.button-colorless {
     color: white;
     background-color: var(--colorless-gray);
 }
 
-.button-off {
+div#algomancyButtonWrapper > button.button-off {
     color: gray;
     background-color: whitesmoke;
 }

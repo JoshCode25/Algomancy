@@ -12,7 +12,7 @@ const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilte
                 placeholder='Search Algomancy Cards'
                 onChange={onSearchChange}
             />
-            <div>
+            <div id="algomancyButtonWrapper">
                 {factionList.map((faction, index) => {
                     return(
                         <FilterButton
