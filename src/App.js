@@ -52,6 +52,7 @@ function App() {
     }
 
     //check if the search input starts with / and contains a non escaped / to see if it's a regex
+    //https://regex101.com/r/Z8KOLp/2 helpful regex website
     let searchFieldWords = searchField.split(' ');
     let regexCheck = /(^\/).*([^\\]\/g?i?m?)$/g;
     setIsRegex(regexCheck.test(searchField));
