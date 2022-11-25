@@ -10,6 +10,8 @@ function App() {
   const [displayCardNames, setDisplayCardNames] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [factionFilter, setFactionFilter] = useState({});
+  const [isRegex, setIsRegex] = useState(false);
+  const [invalidRegex, setInvalidRegex] = useState(false);
 
   useEffect(() => {
     async function fetchCardData() {
@@ -52,8 +54,7 @@ function App() {
     //check if the search input starts with / and contains a non escaped / to see if it's a regex
     let searchFieldWords = searchField.split(' ');
     let regexCheck = /(^\/).*([^\\]\/g?i?m?)$/g;
-    let isRegex = regexCheck.test(searchField);
-    let invalidRegex = false;
+    setIsRegex(regexCheck.test(searchField));
 
     let containsModifiers = false, splitSearch = [], searchRegex = '', modifiers = '', regex = '';
     let filteredCardNames = [];
@@ -65,17 +66,17 @@ function App() {
         if (!containsModifiers) {
           searchRegex = splitSearch.join('/');
         } else if (containsModifiers) {
-          //if there are modifiers, pop them out and remove non-modifier characters
-          modifiers = splitSearch.pop().replace(/[^igm]/g,'');
+          //if there are modifiers, pop them out and remove non-modifier characters, then sort modifiers alphabetically
+          modifiers = splitSearch.pop().replace(/[^gim]/g,'');
           searchRegex = splitSearch.join('/');
         }
 
         try {
           regex = new RegExp(searchRegex, modifiers);
-          invalidRegex = false;
+          setInvalidRegex(false);
         } catch (error) {
           console.error(error);
-          invalidRegex = true;
+          setInvalidRegex(true);
         }
     }
     
@@ -131,9 +132,14 @@ function App() {
   return (
     <div className="App">
       <SearchArea 
-        factionList={factionList} setFactionFilter={setFactionFilter} factionFilter={factionFilter} onSearchChange={onSearchChange}
+        factionList={factionList} setFactionFilter={setFactionFilter} factionFilter={factionFilter} 
+        isRegex={isRegex} onSearchChange={onSearchChange}
       />
-      <DisplayArea displayCardNames={displayCardNames} compiledData={compiledData}/>
+      {!invalidRegex ? 
+        <DisplayArea displayCardNames={displayCardNames} compiledData={compiledData}/> : 
+        <div id='invalRegexMessage'>
+          <h3>Sorry, that's not a valid Regex Expression.</h3>
+        </div>}
     </div>
   );
 }

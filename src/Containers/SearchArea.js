@@ -2,16 +2,16 @@ import React from "react";
 import FilterButton from "../Components/FilterButton.js";
 import '../CSS/searchArea.css'
 
-const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilter}) => {
+const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilter, isRegex}) => {
 
     return (
         <div>
-            {/* <p>Search Names, Text, and Types</p> */}
             <input
                 type='search'
                 placeholder='Search Algomancy Cards'
                 onChange={onSearchChange}
             />
+            {isRegex ? <p id="modifierMessage">Regex Search: modifiers must be in alphabetical order</p>: null}
             <div id="algomancyButtonWrapper">
                 {factionList.map((faction, index) => {
                     return(

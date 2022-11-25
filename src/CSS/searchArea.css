@@ -11,6 +11,12 @@ input {
 
 }
 
+p#modifierMessage {
+    margin: 0px 0px 4px 0px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 @media  screen and (min-width: 400px) {
     input {
         width: 350px;
