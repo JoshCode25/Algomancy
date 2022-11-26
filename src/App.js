@@ -12,6 +12,7 @@ function App() {
   const [factionFilter, setFactionFilter] = useState({});
   const [isRegex, setIsRegex] = useState(false);
   const [invalidRegex, setInvalidRegex] = useState(false);
+  const [factionEquals, setFactionEquals] = useState(false);
 
   useEffect(() => {
     async function fetchCardData() {
@@ -52,7 +53,7 @@ function App() {
     }
 
     //check if the search input starts with / and contains a non escaped / to see if it's a regex
-    //https://regex101.com/r/Z8KOLp/2 helpful regex website
+    //https://regex101.com/r/Z8KOLp/2 helpful regex testing website
     let searchFieldWords = searchField.split(' ');
     let regexCheck = /(^\/).*([^\\]\/g?i?m?)$/g;
     setIsRegex(regexCheck.test(searchField));
@@ -97,7 +98,22 @@ function App() {
           }
         }
 
-        let factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
+        let factionTrue = false;
+        console.log(factionEquals, filteredFactions, cardFactions, filteredFactions === cardFactions);
+        
+        if (factionEquals) {
+          let sameLength = filteredFactions.length === cardFactions.length;
+          if(sameLength) {
+            for(let i=0; i<filteredFactions.length; i++) {
+              let matchesFaction = filteredFactions.includes(cardFactions[i]);
+              if(!matchesFaction) break;
+              if (i === filteredFactions.length -1) factionTrue = true;
+            }
+          }
+        } else if (!factionEquals){
+          //if at least one match between active factions and card's faction(s), show the card
+          factionTrue = filteredFactions.some(faction => cardFactions.includes(faction));
+        }
 
         if(!isRegex) {
           for(let i = 0; i < searchFieldWords.length; i++) {
@@ -124,7 +140,7 @@ function App() {
     }
     setDisplayCardNames(filteredCardNames);
 
-  }, [searchField, factionFilter])
+  }, [searchField, factionFilter, factionEquals])
 
   const onSearchChange = (e) => {
     setSearchField(e.target.value);
@@ -134,7 +150,8 @@ function App() {
     <div className="App">
       <SearchArea 
         factionList={factionList} setFactionFilter={setFactionFilter} factionFilter={factionFilter} 
-        isRegex={isRegex} onSearchChange={onSearchChange}
+        isRegex={isRegex} factionEquals={factionEquals} setFactionEquals={setFactionEquals} 
+        totalDisplayed={displayCardNames.length} onSearchChange={onSearchChange}
       />
       {!invalidRegex ? 
         <DisplayArea displayCardNames={displayCardNames} compiledData={compiledData}/> : 

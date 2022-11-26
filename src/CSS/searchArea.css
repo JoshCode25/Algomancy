@@ -3,12 +3,39 @@ p {
     font-size: 20px;
 }
 
-input {
+div#algomancySearchWrapper > div.flex-wrapper > p.total-display {
+    font-size: 16px;
+    margin: 5px;
+}
+div#algomancySearchWrapper > div.flex-wrapper >button#factionEqualToggleButton {
+    font-size: 16px;
+    margin: 5px 5px;
+    min-width: 80px;
+    min-height: 40px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+div#algomancySearchWrapper > button#factionEqualToggleButton:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px auto;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+input#algomancySearchInput {
     margin: 10px;
     height: 35px;
     width: 250px;
     font-size: 18px;
-
+    border-radius: 8px;
 }
 
 p#modifierMessage {
@@ -18,7 +45,7 @@ p#modifierMessage {
 }
 
 @media  screen and (min-width: 400px) {
-    input {
+    input#algomancySearchInput {
         width: 350px;
     }
 }

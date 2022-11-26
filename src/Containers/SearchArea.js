@@ -2,11 +2,17 @@ import React from "react";
 import FilterButton from "../Components/FilterButton.js";
 import '../CSS/searchArea.css'
 
-const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilter, isRegex}) => {
+const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilter, isRegex, totalDisplayed, factionEquals, setFactionEquals}) => {
+
+    let factionToggleButtonDisplay = factionEquals? 'Equals' : 'Includes';
+
+    const toggleFactionEquals = () => {
+        setFactionEquals(!factionEquals);
+    }
 
     return (
-        <div>
-            <input
+        <div id="algomancySearchWrapper">
+            <input id="algomancySearchInput"
                 type='search'
                 placeholder='Search Algomancy Cards'
                 onChange={onSearchChange}
@@ -23,6 +29,14 @@ const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilte
                         />
                     )
                 })}
+            </div>
+            <div className="flex-wrapper">
+                <p className='total-display'>{`Total Results: ${totalDisplayed}`}</p>
+                <button 
+                    id="factionEqualToggleButton" 
+                    type="button"
+                    onClick={toggleFactionEquals}
+                >Faction Filter Setting: {factionToggleButtonDisplay}</button>
             </div>
         </div>
     )
