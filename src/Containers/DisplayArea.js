@@ -6,7 +6,6 @@ const DisplayArea = ({displayCardNames, compiledData}) => {
 
     return (
         <div>
-            <p className='totalDisplay'>{`Total Results: ${displayCardNames.length}`}</p>
             <div className="scroll">
                 {(displayCardNames.length < 1) ? "" : 
                     displayCardNames.map((displayCardName, i) => {
