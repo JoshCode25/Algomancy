@@ -8,8 +8,11 @@ div#algomancySearchWrapper > div.flex-wrapper > p.total-display {
     margin: 5px;
 }
 div#algomancySearchWrapper > div.flex-wrapper >button#factionEqualToggleButton {
+    color: gray;
+    background-color: whitesmoke;
     font-size: 16px;
     margin: 5px 5px;
+    padding: 0px;
     min-width: 80px;
     min-height: 40px;
     border: 2px solid black;
