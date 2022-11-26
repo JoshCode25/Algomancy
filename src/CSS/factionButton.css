@@ -8,6 +8,8 @@ html {
 }
 
 div#algomancyButtonWrapper > button.algomancy-cards-button {
+    color: black;
+    background-color: whitesmoke;
     font-size: 16px;
     margin: 5px 5px;
     min-width: 80px;

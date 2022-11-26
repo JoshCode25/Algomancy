@@ -7,26 +7,26 @@ div#algomancySearchWrapper > div.flex-wrapper > p.total-display {
     font-size: 16px;
     margin: 5px;
 }
-div#algomancySearchWrapper > div.flex-wrapper >button#factionEqualToggleButton {
-    color: gray;
+div#algomancySearchWrapper > div.flex-wrapper > button#factionEqualToggleButton {
+    color: black;
     background-color: whitesmoke;
     font-size: 16px;
     margin: 5px 5px;
-    padding: 0px;
+    padding: 0px 10px;
     min-width: 80px;
     min-height: 40px;
     border: 2px solid black;
     border-radius: 8px;
 }
 
-div#algomancySearchWrapper > button#factionEqualToggleButton:hover {
+div#algomancySearchWrapper > div.flex-wrapper > button#factionEqualToggleButton:hover {
     cursor: pointer;
     opacity: 0.8;
 }
 
 .flex-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 0px auto;
     min-width: 300px;
@@ -38,6 +38,7 @@ input#algomancySearchInput {
     height: 35px;
     width: 250px;
     font-size: 18px;
+    border: 2px solid black;
     border-radius: 8px;
 }
 
