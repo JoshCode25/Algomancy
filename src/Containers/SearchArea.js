@@ -14,7 +14,7 @@ const SearchArea = ({factionList, onSearchChange, factionFilter, setFactionFilte
         <div id="algomancySearchWrapper">
             <input id="algomancySearchInput"
                 type='search'
-                placeholder='Search Algomancy Cards'
+                placeholder='Search Cards (Regex or Text)'
                 onChange={onSearchChange}
             />
             {isRegex ? <p id="modifierMessage">Regex Search: modifiers must be in alphabetical order</p>: null}

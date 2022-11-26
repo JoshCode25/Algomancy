@@ -37,7 +37,7 @@ div#algomancySearchWrapper > div.flex-wrapper > button#factionEqualToggleButton:
 input#algomancySearchInput {
     margin: 10px;
     height: 35px;
-    width: 250px;
+    width: 300px;
     font-size: 18px;
     border: 2px solid black;
     border-radius: 8px;
@@ -49,8 +49,8 @@ p#modifierMessage {
     font-weight: bold;
 }
 
-@media  screen and (min-width: 400px) {
+@media  screen and (min-width: 450px) {
     input#algomancySearchInput {
-        width: 350px;
+        width: 450px;
     }
 }
