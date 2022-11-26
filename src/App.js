@@ -99,7 +99,6 @@ function App() {
         }
 
         let factionTrue = false;
-        console.log(factionEquals, filteredFactions, cardFactions, filteredFactions === cardFactions);
         
         if (factionEquals) {
           let sameLength = filteredFactions.length === cardFactions.length;
@@ -117,7 +116,7 @@ function App() {
 
         if(!isRegex) {
           for(let i = 0; i < searchFieldWords.length; i++) {
-            let doesContain = compiledString.toLowerCase().includes(searchFieldWords[i]);
+            let doesContain = compiledString.toLowerCase().includes(searchFieldWords[i].toLowerCase());
             if (!doesContain) break;
             if (i === searchFieldWords.length -1) containsSearch = true;
           }
