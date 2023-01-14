@@ -10,6 +10,7 @@
 }
 
 ul.rulingsDisplayListWrapper {
+	overflow: auto;
 	padding: 0;
 }
 
