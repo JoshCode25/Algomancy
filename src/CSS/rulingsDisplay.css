@@ -1,0 +1,25 @@
+.rulingsDisplayWrapper {
+	width: 276px;
+	height: 393px;
+	padding: 10px;
+	border: 2px solid black;
+	border-radius: 16px;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+}
+
+ul.rulingsDisplayListWrapper {
+	padding: 0;
+}
+
+ul.rulingsDisplayListWrapper > li {
+	font-size: 14px;
+	padding: 0 20px;
+	text-align: left;
+	list-style: none;
+}
+
+div.rulingsDisplayWrapper > h3 {
+	font-size: 16px;
+}
