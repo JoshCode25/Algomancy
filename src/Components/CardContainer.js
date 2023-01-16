@@ -11,9 +11,11 @@ const CardContainer = ({ cardInfo }) => {
 		.join('-');
 
 	const defaultRuling = [
-		'No ruling clarifications currently set up for this card. Contact Caleb Gannon at CalebGannonLLC@gmail.com to request an official clarification',
+		'No rulings for this card have been made yet. You can request a ruling or ask a question in the Algomancy Discord (click here).',
 	];
-	const rulings = cardInfo.rulings ? cardInfo.rulings : defaultRuling;
+	const rulings =
+		!!cardInfo[0]?.rulings.length > 0 ? cardInfo[0].rulings : defaultRuling;
+	const useDefaultRuling = !!cardInfo[0]?.rulings.length > 0 ? false : true;
 	const toggleInfo = (cardInfo) => {
 		setDisplayRulings(!displayRulings);
 	};
@@ -26,7 +28,11 @@ const CardContainer = ({ cardInfo }) => {
 			className="cardContainer"
 		>
 			{displayRulings ? (
-				<RulingsDisplay cardName={cardName} rulings={rulings} />
+				<RulingsDisplay
+					cardName={cardName}
+					rulings={rulings}
+					useDefaultRuling={useDefaultRuling}
+				/>
 			) : (
 				<img
 					className="cardImg"

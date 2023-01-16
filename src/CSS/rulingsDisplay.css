@@ -1,4 +1,4 @@
-.rulingsDisplayWrapper {
+div#cardDisplayContainer > div.cardContainer > div.rulingsDisplayWrapper {
 	width: 276px;
 	height: 393px;
 	padding: 10px;
@@ -9,16 +9,34 @@
 	justify-content: flex-start;
 }
 
-ul.rulingsDisplayListWrapper {
+div#cardDisplayContainer
+	> div.cardContainer
+	> div.rulingsDisplayWrapper
+	> ul.rulingsDisplayListWrapper {
 	overflow: auto;
 	padding: 0;
+	list-style: circle inside;
 }
 
-ul.rulingsDisplayListWrapper > li {
+div#cardDisplayContainer
+	> div.cardContainer
+	> div.rulingsDisplayWrapper
+	> ul.rulingsDisplayListWrapper
+	> li {
 	font-size: 14px;
 	padding: 0 20px;
 	text-align: left;
-	list-style: none;
+}
+
+div#cardDisplayContainer
+	> div.cardContainer
+	> div.rulingsDisplayWrapper
+	> ul.rulingsDisplayListWrapper
+	> li
+	> a {
+	font-size: 14px;
+	padding: 0 20px;
+	text-align: left;
 }
 
 div.rulingsDisplayWrapper > h3 {
