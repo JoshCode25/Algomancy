@@ -6,11 +6,9 @@ const RulingsDisplay = ({ cardName, rulings, useDefaultRuling }) => {
 		<div className="rulingsDisplayWrapper">
 			<h3>{cardName} Ruling Clarifications</h3>
 			{useDefaultRuling ? (
-				<ul className="rulingsDisplayListWrapper">
-					<li>
-						<a href="https://discord.gg/VWwdWheXbQ">{rulings}</a>
-					</li>
-				</ul>
+				<div>
+					{rulings} <a href="https://discord.gg/VWwdWheXbQ">(Click Here)</a>
+				</div>
 			) : (
 				<ul className="rulingsDisplayListWrapper">
 					{rulings.map((ruling, i) => {

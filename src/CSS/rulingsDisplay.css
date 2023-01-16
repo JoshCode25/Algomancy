@@ -1,7 +1,6 @@
 div#cardDisplayContainer > div.cardContainer > div.rulingsDisplayWrapper {
-	width: 276px;
-	height: 393px;
-	padding: 10px;
+	width: 100%;
+	height: 100%;
 	border: 2px solid black;
 	border-radius: 16px;
 	display: flex;
@@ -14,8 +13,11 @@ div#cardDisplayContainer
 	> div.rulingsDisplayWrapper
 	> ul.rulingsDisplayListWrapper {
 	overflow: auto;
-	padding: 0;
 	list-style: circle inside;
+}
+
+div#cardDisplayContainer > div.cardContainer > div.rulingsDisplayWrapper > * {
+	padding: 10px;
 }
 
 div#cardDisplayContainer
@@ -41,4 +43,5 @@ div#cardDisplayContainer
 
 div.rulingsDisplayWrapper > h3 {
 	font-size: 16px;
+	padding: 10px;
 }
