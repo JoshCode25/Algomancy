@@ -12,6 +12,7 @@ div#cardDisplayContainer
 	> div.cardContainer
 	> div.rulingsDisplayWrapper
 	> ul.rulingsDisplayListWrapper {
+	max-height: 285px;
 	overflow: auto;
 	list-style: circle inside;
 }
