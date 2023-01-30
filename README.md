@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Algomancy Card Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a tool to search through the cards in a card game under development by Caleb Gannon.
 
-## Available Scripts
+In **Algomancy**, players are in an AI world battling to be the last one standing. Updates and more information about gameplay may be found [here](https://calebgannon.com/algomancy/).
 
-In the project directory, you can run:
+# Valid Search Inputs
 
-### `npm start`
+This search supports both text and REGEX inputs and searches through card name, type, ability, cost, and faction information.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Searches are _case-insensitive_.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Text searches utilize 'bag of words' style searching, meaning it searches for each individual word in an input phrase. For example: 'create tokens' would show a card containing 'create 2 tokens' and a card containing 'Destroy all tokens. Create a Fireball 1'
 
-### `npm test`
+2. Regex may be entered into the search input. Modifiers at the end must be entered alphabetically to be most effective.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Faction Filtering
 
-### `npm run build`
+There is a button displayed for each faction. The default has all factions active with Faction Filter Setting set to _Include_.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clicking/tapping a button will deactivate the corresponding faction and filter it out of search results. Deactivated faction buttons will turn gray instead of the faction's representative color.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The _Faction Filter Setting_ displays how cards are filtered based on their factions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Includes** returns all cards that include at least one of the active factions.
 
-### `npm run eject`
+2. **Equals** returns all cards that match the active factions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Displaying Ruling Explanations
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Several card interactions require special ruling clarifications. Clicking/tapping on a card's image will display whether a card has any ruling clarifications and how/where to request one if needed.

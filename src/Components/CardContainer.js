@@ -11,7 +11,7 @@ const CardContainer = ({ cardInfo }) => {
 		.join('-');
 
 	const defaultRuling = [
-		'No rulings for this card have been made yet. You can request a ruling or ask a question in the Algomancy Discord',
+		'No rulings for this card have been made yet. You can request a ruling or ask a question in the Algomancy Discord - ',
 	];
 	const rulings =
 		!!cardInfo[0]?.rulings.length > 0 ? cardInfo[0].rulings : defaultRuling;
@@ -27,19 +27,18 @@ const CardContainer = ({ cardInfo }) => {
 			}}
 			className="cardContainer"
 		>
-			{displayRulings ? (
+			{displayRulings && (
 				<RulingsDisplay
 					cardName={cardName}
 					rulings={rulings}
 					useDefaultRuling={useDefaultRuling}
 				/>
-			) : (
-				<img
-					className="cardImg"
-					src={`https://calebgannon.com/wp-content/uploads/cardsearch-images/${cardNameDash}.jpg`}
-					alt={`${cardName}`}
-				/>
 			)}
+			<img
+				className="cardImg"
+				src={`https://calebgannon.com/wp-content/uploads/cardsearch-images/${cardNameDash}.jpg`}
+				alt={`${cardName}`}
+			/>
 		</div>
 	);
 };
