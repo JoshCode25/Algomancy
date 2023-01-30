@@ -7,7 +7,7 @@ div#cardDisplayContainer > div.cardContainer > div.rulingsDisplayWrapper {
 	top: 0;
 	left: 0;
 	z-index: 10;
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: rgba(255, 255, 255, 1);
 }
 
 div#cardDisplayContainer
