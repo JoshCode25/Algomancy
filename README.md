@@ -1,10 +1,12 @@
-# Algomancy Card Search
+# Algomancy
+
+## Card Search
 
 This is a tool to search through the cards in a card game under development by Caleb Gannon.
 
 In **Algomancy**, players are in an AI world battling to be the last one standing. Updates and more information about gameplay may be found [here](https://calebgannon.com/algomancy/).
 
-# Valid Search Inputs
+### Valid Search Inputs
 
 This search supports both text and REGEX inputs and searches through card name, type, ability, cost, and faction information.
 
@@ -14,7 +16,7 @@ Searches are _case-insensitive_.
 
 2. Regex may be entered into the search input. Modifiers at the end must be entered alphabetically to be most effective.
 
-# Faction Filtering
+### Faction Filtering
 
 There is a button displayed for each faction. The default has all factions active with Faction Filter Setting set to _Include_.
 
@@ -26,6 +28,6 @@ The _Faction Filter Setting_ displays how cards are filtered based on their fact
 
 2. **Equals** returns all cards that match the active factions.
 
-# Displaying Ruling Explanations
+## Displaying Ruling Explanations
 
 Several card interactions require special ruling clarifications. Clicking/tapping on a card's image will display whether a card has any ruling clarifications and how/where to request one if needed.
