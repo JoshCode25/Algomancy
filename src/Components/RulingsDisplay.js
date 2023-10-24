@@ -7,7 +7,10 @@ const RulingsDisplay = ({ cardName, rulings, useDefaultRuling }) => {
 			<h3>{cardName} Ruling Clarifications</h3>
 			{useDefaultRuling ? (
 				<div>
-					{rulings} <a href="https://discord.gg/VWwdWheXbQ">Click Here</a>
+					{rulings}{' '}
+					<a href="https://discord.gg/VWwdWheXbQ" target="_blank">
+						Click Here
+					</a>
 				</div>
 			) : (
 				<ul className="rulingsDisplayListWrapper">

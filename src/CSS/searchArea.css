@@ -1,56 +1,65 @@
 p {
-    margin: 10px 5px 5px 5px;
-    font-size: 20px;
+	margin: 10px 5px 5px 5px;
+	font-size: 20px;
+}
+
+p.devJosh-text {
+	font-size: 16px;
+	margin: 0 5px 10px 5px;
 }
 
 div#algomancySearchWrapper > div.flex-wrapper > p.total-display {
-    font-size: 16px;
-    margin: 5px;
+	font-size: 16px;
+	margin: 5px;
 }
-div#algomancySearchWrapper > div.flex-wrapper > button#factionEqualToggleButton {
-    color: black;
-    background-color: whitesmoke;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 5px 5px;
-    padding: 0px 10px;
-    min-width: 80px;
-    min-height: 40px;
-    border: 2px solid black;
-    border-radius: 8px;
+div#algomancySearchWrapper
+	> div.flex-wrapper
+	> button#factionEqualToggleButton {
+	color: black;
+	background-color: whitesmoke;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 5px 5px;
+	padding: 0px 10px;
+	min-width: 80px;
+	min-height: 40px;
+	border: 2px solid black;
+	border-radius: 8px;
 }
 
-div#algomancySearchWrapper > div.flex-wrapper > button#factionEqualToggleButton:hover {
-    cursor: pointer;
-    opacity: 0.8;
+div#algomancySearchWrapper
+	> div.flex-wrapper
+	> button#factionEqualToggleButton:hover {
+	cursor: pointer;
+	opacity: 0.8;
 }
 
 .flex-wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0px auto;
-    min-width: 300px;
-    max-width: 400px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0px auto;
+	min-width: 300px;
+	max-width: 400px;
 }
 
 input#algomancySearchInput {
-    margin: 10px;
-    height: 35px;
-    width: 300px;
-    font-size: 18px;
-    border: 2px solid black;
-    border-radius: 8px;
+	margin: 10px;
+	height: 35px;
+	width: 300px;
+	font-size: 18px;
+	border: 2px solid black;
+	border-radius: 8px;
 }
 
 p#modifierMessage {
-    margin: 0px 0px 4px 0px;
-    font-size: 14px;
-    font-weight: bold;
+	margin: 0px 0px 4px 0px;
+	font-size: 14px;
+	font-weight: bold;
 }
 
-@media  screen and (min-width: 450px) {
-    input#algomancySearchInput {
-        width: 450px;
-    }
+@media screen and (min-width: 450px) {
+	input#algomancySearchInput {
+		width: 450px;
+	}
 }
