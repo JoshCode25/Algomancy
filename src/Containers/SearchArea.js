@@ -55,7 +55,11 @@ const SearchArea = ({
 			</div>
 			<p class="devJosh-text">
 				Search Designed by:{' '}
-				<a href="https://www.developingjosh.com/" target="_blank">
+				<a
+					href="https://www.developingjosh.com/"
+					target="_blank"
+					rel="noreferrer"
+				>
 					developingjosh
 				</a>
 			</p>
